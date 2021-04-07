@@ -1,22 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import ActionStackProvider from "./components/ActionStackProvider";
+import withActionStack from "./components/withActionStack";
+
+import ProviderObject from "./components/ProviderObject";
+import HocObject from "./components/HocObject";
+import HookObject from "./components/HookObject";
 
 function App() {
+  //not providing the onUpdate function for the sake of the demonstration
+  const HocObjectWithActionStack = withActionStack(HocObject, {
+    initialValue: { dev: true, qa: false },
+  });
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <HocObjectWithActionStack />
+        <HookObject />
+        {/* not providing the onUpdate function for the sake of the demonstration */}
+        <ActionStackProvider initialValue={{ dev: true, qa: false }}>
+          <ProviderObject />
+        </ActionStackProvider>
       </header>
     </div>
   );
